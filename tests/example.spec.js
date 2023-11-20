@@ -1,7 +1,12 @@
 // @ts-check
 const { test } = require('@playwright/test');
+const path = require('path');
 
 test('has title', async ({ page, context, browserName }) => {
+
+  await context.addInitScript({
+    path: path.resolve(__dirname, 'initScript.js'),
+  });
 
   await context.routeFromHAR(`har/${browserName}.har`, {
     update: true,
@@ -12,7 +17,6 @@ test('has title', async ({ page, context, browserName }) => {
 
   await page.goto('http://localhost:3000/');
 
-  // Expect a title "to contain" a substring.
   await page.waitForLoadState("networkidle");
 });
 

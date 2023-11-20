@@ -21,7 +21,6 @@ function App() {
       body: JSON.stringify({ title: 'POST request that is cloned' })
     }).clone();
 
-
     fetch(clonedRequest)
       .then(response => response.json())
       .then(result => setClonedResult(result));
